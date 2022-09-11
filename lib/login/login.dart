@@ -3,14 +3,14 @@ import 'package:chat/show.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class Register extends StatefulWidget {
-  static String nameKey = "register";
+class Login extends StatefulWidget {
+  static String nameKey = "login";
 
   @override
-  State<Register> createState() => _RegisterState();
+  State<Login> createState() => _LoginState();
 }
 
-class _RegisterState extends State<Register> {
+class _LoginState extends State<Login> {
   var formKey = GlobalKey<FormState>();
 
   var email = TextEditingController();
@@ -45,34 +45,6 @@ class _RegisterState extends State<Register> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      TextFormField(
-                        validator: (text) {
-                          if (text == null || text.trim().isEmpty) {
-                            return "Please Writing Name you";
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          label: Text(
-                            "First Name",
-                            style: Theme.of(context).textTheme.headline4,
-                          ),
-                        ),
-                      ),
-                      TextFormField(
-                        validator: (text) {
-                          if (text == null || text.trim().isEmpty) {
-                            return "Please Writing User Name";
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          label: Text(
-                            "User Name",
-                            style: Theme.of(context).textTheme.headline4,
-                          ),
-                        ),
-                      ),
                       TextFormField(
                         controller: email,
                         validator: (text) {
@@ -111,7 +83,7 @@ class _RegisterState extends State<Register> {
                               register();
                             },
                             child: Text(
-                              "Register",
+                              "Login",
                               style: Theme.of(context)
                                   .textTheme
                                   .headline3!
@@ -133,8 +105,7 @@ class _RegisterState extends State<Register> {
     }
     showLoading(context, "Loading .. .");
     authService
-        .createUserWithEmailAndPassword(
-            email: email.text, password: password.text)
+        .signInWithEmailAndPassword(email: email.text, password: password.text)
         .then((userCredential) {
       hideLoading(context);
       showMessage(context, (userCredential?.user) ?? "");
