@@ -12,10 +12,9 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   var formKey = GlobalKey<FormState>();
-
   var email = TextEditingController();
-
   var password = TextEditingController();
+  bool pasowrdVisibility = false;
 
   @override
   Widget build(BuildContext context) {
@@ -89,6 +88,7 @@ class _RegisterState extends State<Register> {
                         ),
                       ),
                       TextFormField(
+                        obscureText: pasowrdVisibility,
                         controller: password,
                         validator: (text) {
                           if (text == null || text.trim().isEmpty) {
@@ -97,11 +97,18 @@ class _RegisterState extends State<Register> {
                           return null;
                         },
                         decoration: InputDecoration(
-                          label: Text(
-                            "Password",
-                            style: Theme.of(context).textTheme.headline4,
-                          ),
-                        ),
+                            label: Text(
+                              "Password",
+                              style: Theme.of(context).textTheme.headline4,
+                            ),
+                            suffixIcon: InkWell(
+                                onTap: () {
+                                  pasowrdVisibility = !pasowrdVisibility;
+                                  setState(() {});
+                                },
+                                child: Icon(pasowrdVisibility == true
+                                    ? Icons.visibility
+                                    : Icons.visibility_off))),
                       ),
                       Padding(
                         padding:
@@ -137,7 +144,7 @@ class _RegisterState extends State<Register> {
             email: email.text, password: password.text)
         .then((userCredential) {
       hideLoading(context);
-      showMessage(context, (userCredential?.user) ?? "");
+      showMessage(context, (userCredential.user?.uid) ?? "");
     }).onError((error, stackTrace) {
       hideLoading(context);
       showMessage(context, error.toString());

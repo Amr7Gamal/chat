@@ -1,4 +1,5 @@
 import 'package:chat/MyTheme.dart';
+import 'package:chat/login/login.dart';
 import 'package:chat/register/register.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'firebase_options.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -17,8 +19,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'chat',
-      initialRoute: Register.nameKey,
-      routes: {Register.nameKey: (_) => Register()},
+      initialRoute: Login.nameKey,
+      routes: {
+        Register.nameKey: (_) => Register(),
+        Login.nameKey: (_) => Login()
+      },
       theme: MyTheme.lightTheme,
       debugShowCheckedModeBanner: false,
     );
