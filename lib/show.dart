@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'MyTheme.dart';
 
-void showMessage(BuildContext context, message,
+void showMessageDialog(BuildContext context, String message,
     {String? buttonTextOne,
     VoidCallback? buttonActionOne,
     String? buttonTextTwo,
@@ -42,8 +42,8 @@ void showMessage(BuildContext context, message,
       barrierDismissible: isCanceLable);
 }
 
-void showLoading(BuildContext context, String loadingMessage,
-    {bool isCanceLable = true}) {
+void showLoadingDialog(BuildContext context, String loadingMessage,
+    {bool isCancelLabel = true}) {
   showDialog(
       context: context,
       builder: (_) {
@@ -60,9 +60,9 @@ void showLoading(BuildContext context, String loadingMessage,
           ),
         );
       },
-      barrierDismissible: isCanceLable);
+      barrierDismissible: isCancelLabel);
 }
 
-void hideLoading(BuildContext context) {
+void hideLoadingDialog(BuildContext context) {
   Navigator.pop(context);
 }

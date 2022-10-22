@@ -21,10 +21,11 @@ class MyTheme {
       ),
       textTheme: TextTheme(
           headline1: TextStyle(
-              fontSize: 28, fontWeight: FontWeight.bold, color: whiteColor),
+              fontSize: 28, fontWeight: FontWeight.bold, color: lightBlueColor),
           headline2: TextStyle(
-              fontSize: 26, fontWeight: FontWeight.bold, color: blackColor),
+              fontSize: 26, fontWeight: FontWeight.bold, color: whiteColor),
           headline3: TextStyle(
-              fontSize: 18, fontWeight: FontWeight.bold, color: lightBlueColor),
-          headline4: TextStyle(fontSize: 14, color: lightBlueColor)));
+              fontSize: 18, fontWeight: FontWeight.bold, color: whiteColor),
+          headline4: TextStyle(fontSize: 14, color: lightBlueColor),
+          headline5: TextStyle(fontSize: 14, color: Colors.black26)));
 }

@@ -1,8 +1,12 @@
 import 'package:chat/MyTheme.dart';
-import 'package:chat/login/login_viewModel.dart';
-import 'package:chat/show.dart';
+import 'package:chat/base/base.dart';
+import 'package:chat/ui/login/login_viewModel.dart';
+import 'package:chat/ui/register/register.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
+
+import '../home/home.dart';
 
 class Login extends StatefulWidget {
   static String nameKey = "login";
@@ -11,17 +15,16 @@ class Login extends StatefulWidget {
   State<Login> createState() => _LoginState();
 }
 
-class _LoginState extends State<Login> implements LoginNotifier {
+class _LoginState extends BaseState<Login, LoginViewModel>
+    implements LoginNavigator {
   var formKey = GlobalKey<FormState>();
   var email = TextEditingController();
   var password = TextEditingController();
-  late LoginViewModel viewModel;
+  bool pasowrdVisibility = true;
 
   @override
-  void initState() {
-    super.initState();
-    viewModel = LoginViewModel();
-    viewModel.notifier = this;
+  LoginViewModel initViewModel() {
+    return LoginViewModel();
   }
 
   @override
@@ -70,6 +73,7 @@ class _LoginState extends State<Login> implements LoginNotifier {
                           ),
                         ),
                         TextFormField(
+                          obscureText: pasowrdVisibility,
                           controller: password,
                           validator: (text) {
                             if (text == null || text.trim().isEmpty) {
@@ -78,11 +82,18 @@ class _LoginState extends State<Login> implements LoginNotifier {
                             return null;
                           },
                           decoration: InputDecoration(
-                            label: Text(
-                              "Password",
-                              style: Theme.of(context).textTheme.headline4,
-                            ),
-                          ),
+                              label: Text(
+                                "Password",
+                                style: Theme.of(context).textTheme.headline4,
+                              ),
+                              suffixIcon: InkWell(
+                                  onTap: () {
+                                    pasowrdVisibility = !pasowrdVisibility;
+                                    setState(() {});
+                                  },
+                                  child: Icon(pasowrdVisibility == true
+                                      ? Icons.visibility
+                                      : Icons.visibility_off))),
                         ),
                         Padding(
                           padding:
@@ -98,7 +109,20 @@ class _LoginState extends State<Login> implements LoginNotifier {
                                     .headline3!
                                     .copyWith(color: MyTheme.whiteColor),
                               )),
-                        )
+                        ),
+                        InkWell(
+                          onTap: () {
+                            register();
+                          },
+                          child: Text(
+                            "Register",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline4!
+                                .copyWith(fontSize: 16),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
                       ],
                     )),
               ),
@@ -111,22 +135,22 @@ class _LoginState extends State<Login> implements LoginNotifier {
     if (formKey.currentState!.validate() == false) {
       return;
     }
-    viewModel.loding(email.text, password.text);
-  }
-
-/*
-@override
-  void showMessage({String? message}) {
-    showMessage(context, message: message);
-  }
-  */
-  @override
-  void showLoding({String text = "Loding.."}) {
-    showLoading(context, text);
+    viewModel.loding(email, password);
   }
 
   @override
-  void hideLoding() {
-    hideLoding();
+  register() {
+    Navigator.pushNamed(context, Register.nameKey);
+  }
+
+  @override
+  void showHome() {
+    Navigator.pushNamed(context, Home.nameKey);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    viewModel.checkLoggedinUser();
   }
 }
