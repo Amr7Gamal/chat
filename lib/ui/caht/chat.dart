@@ -108,7 +108,7 @@ class _ChatState extends BaseState<Chat, ChatViewModil>
                             ),
                             ElevatedButton(
                                 onPressed: () {
-                                  viewModel.sent(content.text);
+                                  viewModel.sent(content);
                                 },
                                 child: Icon(Icons.send))
                           ],
@@ -124,8 +124,4 @@ class _ChatState extends BaseState<Chat, ChatViewModil>
     return ChatViewModil();
   }
 
-  @override
-  contentClear() {
-    content.clear();
-  }
 }

@@ -54,7 +54,8 @@ class _HomeState extends BaseState<Home, HomeViewModel>
                     SharedData.user = null;
                     Navigator.pushNamed(context, Login.nameKey);
                   },
-                  child: Icon(Icons.logout),
+                  child: Padding(
+                      padding: EdgeInsets.all(6), child: Icon(Icons.logout)),
                 )
               ],
             ),

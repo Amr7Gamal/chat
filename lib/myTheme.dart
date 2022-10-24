@@ -25,7 +25,7 @@ class MyTheme {
           headline2: TextStyle(
               fontSize: 26, fontWeight: FontWeight.bold, color: whiteColor),
           headline3: TextStyle(
-              fontSize: 18, fontWeight: FontWeight.bold, color: whiteColor),
+              fontSize: 16, fontWeight: FontWeight.bold, color: whiteColor),
           headline4: TextStyle(fontSize: 14, color: lightBlueColor),
           headline5: TextStyle(fontSize: 14, color: Colors.black26)));
 }

@@ -49,7 +49,6 @@ class _RoomAddState extends BaseState<RoomAdd, RoomAddViewModel>
                 child: Container(
                     margin: EdgeInsets.all(30),
                     padding: EdgeInsets.all(18),
-                    height: MediaQuery.of(context).size.height * .85,
                     decoration: BoxDecoration(
                         color: MyTheme.whiteColor,
                         borderRadius: BorderRadius.circular(18)),
@@ -66,7 +65,7 @@ class _RoomAddState extends BaseState<RoomAdd, RoomAddViewModel>
                               )),
                           Image.asset("assets/images/room_add.png"),
                           SizedBox(
-                            height: 18,
+                            height: 14,
                           ),
                           TextFormField(
                             controller: name,

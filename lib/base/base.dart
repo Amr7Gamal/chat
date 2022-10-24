@@ -5,6 +5,8 @@ import '../show.dart';
 abstract class BaseNavigator {
   void showLoading({String text = "Loding..", bool isCancelLabel = false});
 
+  setStateS();
+
   void hideLoading();
 
   void showMessage(String? message,
@@ -21,6 +23,7 @@ class BaseViewModel<Not extends BaseNavigator> extends ChangeNotifier {
 
 abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel>
     extends State<T> implements BaseNavigator {
+  @override
   late VM viewModel;
 
   @override
@@ -40,10 +43,10 @@ abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel>
   @override
   void showMessage(String? message,
       {String? buttonTextOne,
-      VoidCallback? buttonActionOne,
-      String? buttonTextTwo,
-      VoidCallback? buttonActionTwo,
-      bool isCanceLable = true}) {
+        VoidCallback? buttonActionOne,
+        String? buttonTextTwo,
+        VoidCallback? buttonActionTwo,
+        bool isCanceLable = true}) {
     showMessageDialog(context, message ?? "",
         buttonTextOne: buttonTextOne,
         buttonActionOne: buttonActionOne,
@@ -55,5 +58,10 @@ abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel>
   @override
   void hideLoading() {
     hideLoadingDialog(context);
+  }
+
+  @override
+  setStateS() {
+    setState(() {});
   }
 }

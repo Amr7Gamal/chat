@@ -17,28 +17,30 @@ class RoomWidget extends StatelessWidget {
       },
       child: Card(
         margin: EdgeInsets.all(24),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Image.asset(
-              "assets/images/${room.idCat}.png",
-              width: 100,
-              height: 100,
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            Text(
-              "${room.name}",
-              style: Theme.of(context)
-                  .textTheme
-                  .headline3!
-                  .copyWith(color: MyTheme.blackColor),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-          ],
+        child: Padding(
+          padding: EdgeInsets.all(6),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Image.asset(
+                "assets/images/${room.idCat}.png",
+                width: MediaQuery.of(context).size.width * 0.24,
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Text(
+                "${room.name}",
+                style: Theme.of(context)
+                    .textTheme
+                    .headline3!
+                    .copyWith(color: MyTheme.blackColor),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+            ],
+          ),
         ),
       ),
     );
